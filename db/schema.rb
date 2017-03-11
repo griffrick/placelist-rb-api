@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170308020733) do
+ActiveRecord::Schema.define(version: 20170311174515) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,20 @@ ActiveRecord::Schema.define(version: 20170308020733) do
     t.index ["author_id"], name: "index_placelists_on_author_id", using: :btree
   end
 
+  create_table "placelists_places", id: false, force: :cascade do |t|
+    t.integer "placelist_id", null: false
+    t.integer "place_id",     null: false
+    t.index ["place_id"], name: "index_placelists_places_on_place_id", using: :btree
+    t.index ["placelist_id"], name: "index_placelists_places_on_placelist_id", using: :btree
+  end
+
+  create_table "placelists_users", id: false, force: :cascade do |t|
+    t.integer "user_id",      null: false
+    t.integer "placelist_id", null: false
+    t.index ["placelist_id"], name: "index_placelists_users_on_placelist_id", using: :btree
+    t.index ["user_id"], name: "index_placelists_users_on_user_id", using: :btree
+  end
+
   create_table "places", force: :cascade do |t|
     t.string   "name"
     t.string   "place_type"
@@ -33,6 +47,13 @@ ActiveRecord::Schema.define(version: 20170308020733) do
     t.float    "lat"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "places_users", id: false, force: :cascade do |t|
+    t.integer "user_id",  null: false
+    t.integer "place_id", null: false
+    t.index ["place_id"], name: "index_places_users_on_place_id", using: :btree
+    t.index ["user_id"], name: "index_places_users_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|

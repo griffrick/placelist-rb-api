@@ -3,13 +3,23 @@
 import requests
 import json
 
-data = {
-	"email": "test1@tet.com",
-	"username": "garfbarf",
+login_data = {
+	"email": "rickleg93@gmail.com",
+	"username": "griffgraff",
 	"password": "password",
-	"password_confirmation": "password"
 }
 
-r = requests.post('http://localhost:3000/user/register', data=data)
-print r.status_code
-print r.text
+login_request = requests.post('http://localhost:3000/login', data=login_data)
+print login_request.status_code
+print login_request.text
+
+auth_token = json.loads(login_request.text)["auth_token"]
+
+auth_headers = {
+	"Authorization": auth_token
+}
+
+place_request = requests.get('http://localhost:3000/places', headers=auth_headers)
+print place_request.status_code
+print place_request.text
+print place_request

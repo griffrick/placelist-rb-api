@@ -16,5 +16,3 @@ class Place < ApplicationRecord
 	end
 
 end
-
-#need to generate migrations

@@ -6,11 +6,10 @@ class Placelist < ApplicationRecord
 	has_and_belongs_to_many :places
 
 	validates :title, presence: true
+	validates :author_id, presence: true
 
 	def initialize(attributes = {})
 		super(attributes)
 	end
 
 end
-
-#need to generate migrations
