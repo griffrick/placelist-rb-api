@@ -9,7 +9,6 @@ class AuthenticateUser
 
 	def call 
 		toReturn = JsonWebToken.encode(user_id: user.id) if user 
-		puts toReturn
 		toReturn
 	end 
 
