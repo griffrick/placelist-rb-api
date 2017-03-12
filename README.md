@@ -32,12 +32,23 @@ $ rails routes
               PUT    /users/:id(.:format)      users#update
               DELETE /users/:id(.:format)      users#destroy
         login POST   /login(.:format)          authentication#authenticate
-	user_register POST   /user/register(.:format)  user#create
+user_register POST   /user/register(.:format)  user#create
 
 ```
+
+## Tests
+Tests can be found in the running_script.py file. It should be pretty self explanatory
 
 ## Future Planning
 ##### geocoding
 The geocoding gem can be found at https://github.com/alexreisner/geocoder
 * Maybe the /places endpoint could just take in latitude and longitude?
 
+## Questions
+1. What exactly will the data coming in look like for a POST to /places
+  * Maybe it could just be latitude and longitude and the API could take care of constructing things like address, etc
+2. What will POST requests to /placelists look like?
+3. Should unauthenticated users be able to get any information back at all?
+ * Things like places aren't private
+ * Although having a log in page before they can access the app wouldn't necessarily be all that bad
+4. Maybe a DELETE request to a page would remove all associations of the current user and that Place.
