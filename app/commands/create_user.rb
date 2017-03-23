@@ -20,18 +20,14 @@ class CreateUserCommand
 
 	def user
 		emailExists = User.find_by_email(email)
-		if emailExists
-			errors.add :user_validation, 'email already exists'
-		end
+		errors.add :user_validation, 'email already exists' if emailExists
 
 		usernameExists = User.find_by_username(username)
-		if usernameExists
-			errors.add :user_validation, 'username already exists'
-		end
-
-		user = User.new(username: username, email: email, password: password, password_confirmation: password_confirmation) 	
+		errors.add :user_validation, 'username already exists' if usernameExists
 		
+		user = User.new(username: username, email: email, password: password, password_confirmation: password_confirmation) 	
 		if user.save 
+			@current_user = user
 			user user.authenticate(password)
 		else 
 			errors.add :user_validation, 'error occured creating user'

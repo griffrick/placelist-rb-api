@@ -8,8 +8,7 @@ class AuthenticateUser
 	end 
 
 	def call 
-		toReturn = JsonWebToken.encode(user_id: user.id) if user 
-		toReturn
+		toReturn = JsonWebToken.encode(user_id: user.id) if user
 	end 
 
 	private 

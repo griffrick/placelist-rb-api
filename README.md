@@ -52,3 +52,18 @@ The geocoding gem can be found at https://github.com/alexreisner/geocoder
  * Things like places aren't private
  * Although having a log in page before they can access the app wouldn't necessarily be all that bad
 4. Maybe a DELETE request to a page would remove all associations of the current user and that Place.
+5. I assumed that a POST to /placelists would contain a place with the structure:
+```
+{
+  "place": {
+    "name": "<name>",
+    "place_type": "<place_type>",
+    "street_address": "<street_address>",
+    "zip_code": "<5 digit zip code>",
+    "lon": <longitude>,
+    "lat": <latitude
+  }
+}
+```
+6. Looks like POSTing data to /placelists/[:id] doesn't have the ability to take in a nested place object.
+  * Might just need to put the lat and lon of the place.

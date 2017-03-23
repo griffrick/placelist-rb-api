@@ -3,8 +3,6 @@ class UserController < ApplicationController
 
 	def create
 		command = CreateUserCommand.call(params[:username], params[:email], params[:password], params[:password_confirmation])
-		puts command.success?
-		puts command.result
 		if command.success?
 			render json: { auth_token: command.result }
 		else
