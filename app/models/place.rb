@@ -7,7 +7,6 @@ class Place < ApplicationRecord
 	validates :place_type, presence: true
 	validates :street_address, presence: true
 	validates :state, presence: true
-	validates :zip_code, length: { is: 5 }
 	validates :address, presence: true
 	validates :lon, presence: true
 	validates :lat, presence: true
