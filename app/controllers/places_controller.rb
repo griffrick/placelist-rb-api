@@ -7,7 +7,7 @@ class PlacesController < ApplicationController
 
 	def create
 		place = Place.new(address: params[:address], name: params[:name], place_type: params[:place_type], street_address: params[:street_address], state: params[:state], zip_code: params[:zip_code], lon: params[:lon], lat: params[:lat])
-		return render json: { 'id': place.id } if place.valid?
+		return render json: place if place.save!
 		render status: 500, json: {"errors": "place not valid"}
 	end
 
