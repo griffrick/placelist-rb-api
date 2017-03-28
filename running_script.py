@@ -75,13 +75,13 @@ deletePlace = False
 #	GET /placelists
 getPlacelists = False
 #	POST /placelists
-createPlacelist = False
+createPlacelist = True
 #	PATCH /placelists/[:id] or PUT /placelists/[:id]
 updatePlacelist = False
 #	DELETE /placelists/[:id]
 deletePlacelist = False
 # POST /placelists/1
-addPlaceToPlacelist = True
+addPlaceToPlacelist = False
 
 # Booleans for requests which deal with Users
 # GET /users/id

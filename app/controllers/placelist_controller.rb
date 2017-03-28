@@ -7,7 +7,12 @@ class PlacelistsController < ApplicationController
 
 	def create
 		placelist = Placelist.new(title: params[:title], author_id: @current_user.id)
-		render json: placelist if placelist.valid? && placelist.save
+		if placelist.save?
+			@current_user.placelists << placelist
+			render json: placelist if placelist.valid? && placelist.save
+		else
+			render json: {"errors": placelist.errors}
+		end
 	end
 
 	def update
