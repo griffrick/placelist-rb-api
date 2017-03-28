@@ -2,7 +2,7 @@ class PlacelistsController < ApplicationController
 
 	#Retrieves all placelists for the current user
 	def index
-		render json: {'palcelists': @current_user.placelists.to_json}
+		render json: {'placelists': @current_user.placelists}
 	end
 
 	def create
