@@ -22,6 +22,7 @@ class PlacelistsController < ApplicationController
 
 	def add_place
 		puts params.inspect
+		puts params.name
 		placeParams = params[:place]
 		new_place = Place.new(name: placeParams[:name], place_type: placeParams[:place_type], street_address: placeParams[:street_address], state: placeParams[:state], zip_code: placeParams[:zip_code], lon: placeParams[:lon], lat: placeParams[:lat])
 		puts new_place.valid?
