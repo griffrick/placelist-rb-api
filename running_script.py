@@ -53,7 +53,8 @@ update_placelist_data = {
 		"street_address": "<street_address>",
 		"zip_code": "21227",
 		"lon": 16.23519,
-		"lat": 72.03458
+		"lat": 72.03458,
+		"address": "<address>"
 	}
 }
 

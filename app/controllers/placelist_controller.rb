@@ -23,7 +23,7 @@ class PlacelistsController < ApplicationController
 	def add_place
 		puts params.inspect
 		logger.info params[:name]
-		new_place = Place.new(name: params[:name], place_type: params[:place_type], street_address: params[:street_address], state: params[:state], zip_code: params[:zip_code], lon: params[:lon], lat: params[:lat])
+		new_place = Place.new(name: params[:name], place_type: params[:place_type], street_address: params[:street_address], state: params[:state], zip_code: params[:zip_code], lon: params[:lon], lat: params[:lat], address: params[:address])
 		puts new_place.to_json
 		placelist = Placelist.find_by_id(params[:id])
 		if new_place.valid?
