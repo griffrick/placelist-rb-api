@@ -3,10 +3,18 @@
 import requests
 import json
 
-host_url = 'http://localhost:3000'
+# host_url = 'http://localhost:3000'
+host_url = 'https://warm-savannah-28107.herokuapp.com'
 users_url = host_url + '/users'
 places_url = host_url + '/places'
 placelists_url = host_url + '/placelists'
+
+create_user_data = {
+	"email": "rickleg93@gmail.com",
+	"username": "griffgraff",
+	"password": "password",
+	"password_confirmation": "password"
+}
 
 login_data = {
 	"email": "rickleg93@gmail.com",
@@ -14,28 +22,28 @@ login_data = {
 	"password": "password",
 }
 
-login_request = requests.post('http://localhost:3000/login', data=login_data)
-print login_request.status_code
-print login_request.text
-
-auth_token = json.loads(login_request.text)["auth_token"]
-
-auth_headers = {
-	"Authorization": auth_token
-}
-
 place_data = {
 	"name": "test place1",
 	"place_type": "test type1",
 	"street_address": "test address1",
 	"state": "test state1",
-	"zip_code": "21227",
+	# "zip_code": "21227",
 	"lon": 12.42314,
 	"lat": 15.12433,
+	"address": "test_address 1"
+}
+
+invalid_place_data = {
+	"name": "invalid",
+	"place_type": "invalid type",
+	"street_address": "invalid street address",
+	"lon": 12.2349,
+	"lat": 15.1234,
+	#missing address field
 }
 
 new_placelist_data = {
-	"name": "test_placelist1"
+	"title": "test_placelist1"
 }
 
 update_placelist_data = {
@@ -70,26 +78,42 @@ getPlace = False
 updatePlace = False
 #	DELETE /places/[:id]
 deletePlace = False
+#	POST /places
+invalidCreatePlace = False
 
 # Booleans for requests which deal with Placelists
 #	GET /placelists
 getPlacelists = False
 #	POST /placelists
-createPlacelist = True
+createPlacelist = False
 #	PATCH /placelists/[:id] or PUT /placelists/[:id]
 updatePlacelist = False
 #	DELETE /placelists/[:id]
 deletePlacelist = False
 # POST /placelists/1
-addPlaceToPlacelist = False
+addPlaceToPlacelist = True
 
 # Booleans for requests which deal with Users
 # GET /users/id
 showUser = False
 # PUT or PATCH /users/id
 updateUser = False
+# POST /user/register
+createUser = False
 
-# print json.dumps(place_data)
+if createUser:
+	request = requests.post(host_url + '/user/register', data = create_user_data)
+	print_request_info(request)
+
+login_request = requests.post(host_url + '/login', data = login_data)
+print login_request.status_code
+print login_request.text
+
+auth_token = json.loads(login_request.text)["auth_token"]
+
+auth_headers = {
+	"Authorization": auth_token
+}
 
 if getPlaces:
 	request = requests.get(places_url, headers = auth_headers)
@@ -97,6 +121,10 @@ if getPlaces:
 
 if createPlace:
 	request = requests.post(places_url, headers = auth_headers, data = place_data)
+	print_request_info(request)
+
+if invalidCreatePlace:
+	request = requests.post(places_url, headers = auth_headers, data = invalid_place_data)
 	print_request_info(request)
 
 # Endpoint not implemented yet
